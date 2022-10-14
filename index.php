@@ -1,31 +1,21 @@
 <?php
 
 require_once 'classes/Compte.php';
+require_once 'classes/CompteCourant.php';
+require_once 'classes/CompteEpargne.php';
+require_once 'classes/CompteEpargneCourant.php';
 
 // On instantie le compte
-$compte1 = new Compte('John', 500);
-// $compte1->titulaire = 'John';
-// $compte1->solde = 500;
-
-// On déposer 100 €
-$compte1->deposer(100);
-
-echo '<br>';
-
-$compte1->voirSolde();
-
-echo '<br>';
-
-// Pour retirer de l'argent
+$compte1 = new CompteCourant('John', 500, 100);
 $compte1->retirer(100);
-
-echo '<br>';
-
 var_dump($compte1);
 
-echo '<br>';
+echo '<br><br>';
 
-// $compte2 = new Compte('Robert');
-// // $compte2->titulaire = 'Robert';
-// $compte2->solde = 11532.59;
-// var_dump($compte2);
+$compteEpargne = new CompteEpargneCourant('John', 800, 10, 200);
+var_dump($compteEpargne);
+
+echo '<br><br>';
+
+$compteEpargne->verserInterets();
+var_dump($compteEpargne);

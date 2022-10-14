@@ -3,7 +3,7 @@
 /**
  * Objet Compte bancaire
  */
-    class Compte
+    abstract class Compte
     {
         // Mes propriétés
 
@@ -12,14 +12,14 @@
          *
          * @var string
          */
-        public $titulaire;
+        private $titulaire;
 
         /**
          * Solde du compte
          *
          * @var float
          */
-        public $solde;
+        protected float $solde;
 
         // fonction magique qui s'éxecute automatiquement à chaque New
         /**
@@ -35,6 +35,61 @@
 
             // On attribue le montant à la propritété solde
             $this->solde = $montant;
+        }
+
+        // Accesseurs / Getter
+        /**
+         * Getter de Titulaire - Retourne la valeur du titulaire du compte
+         *
+         * @return string
+         */
+        public function getTitulaire(): string
+        {
+            return $this->titulaire;
+        }
+
+        // Setter
+        /**
+         * Modifier le nom du titulaire et retourne l'objet
+         *
+         * @param string $nom Nom du titulaire
+         * @return Compte Compte bancaire
+         */
+        public function setTitulaire(string $nom): self
+        {
+            // On vérifie si on a un titulaire
+            if($nom != ""){
+                $this->titulaire = $nom;
+            }
+
+            return $this;
+        }
+
+        // Getter de solde
+        /**
+         * Retourne le solde du compte
+         *
+         * @return float Solde du compte
+         */
+        public function getSolde(): float
+        {
+            return $this->solde;
+        }
+
+        // Setter de solde
+        /**
+         * Modifier le solde du compte
+         *
+         * @param float $montant Montant du solde
+         * @return Compte Compte bancaire
+         */
+        public function setSolde(float $montant): self
+        {
+            if($montant >= 0){
+                $this->solde = $montant + ($montant * self::TAUX_INTERETS/100);
+            }
+
+            return $this;
         }
 
         /**
